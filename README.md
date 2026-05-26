@@ -24,7 +24,7 @@ LC-Power captures latent causal dependencies among monitoring variables while re
 
 ## Dataset Preparation
 
-We data on the "https://drive.google.com/drive/my-drive?dmr=1&ec=wgc-drive-%5Bmodule%5D-goto"
+Our data on the "https://drive.google.com/drive/folders/1DMAUp6VTeNnh2nKXe4SqXQDRjwQFOVY4?usp=drive_link"
 
 ### Download Links
 | Dataset | Download Link |
