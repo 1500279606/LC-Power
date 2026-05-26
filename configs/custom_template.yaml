@@ -1,0 +1,56 @@
+# LC-Power 配置 - 自定义数据集模板
+
+MODEL:
+  NAME: LC-Power
+
+DATA:
+  NAME: YourDatasetName     # 修改为你的数据集名称
+  BASE_DIR: data/
+  SCALE: standard           # standard, min-max, none
+  WIN_SIZE: 10              # 时间窗口大小
+  TRAIN_STEP: 1
+  TEST_STEP: 1
+  N_VAR: 64                 # 修改为你的数据集变量数
+  TRAIN_RATIO: 0.8
+  DOWNSAMPLE_RATE: 1        # 下采样率 (1 表示不下采样)
+
+Causal:
+  ENCODER_ARCH: sparse
+  TEMPERATURE: 0.1
+  SIM_THRESHOLD_SCHEDULE: True
+  SIM_THRESHOLD_START: 0.5
+  SIM_THRESHOLD_END: 0.9
+  POSITIVE_AUGMENTOR:
+    ENABLE: True
+    NOISE_LEVEL: 0.1
+  PROJECTOR:
+    INPUT_DIM: 512
+    HIDDEN_DIM: 1024
+    OUTPUT_DIM: 512
+
+SPARSESETSFE:
+  D_MODEL: 512
+  MODEL_TYPE: mlp           # 或 linear (更轻量)
+  PERIOD_LEN: 2             # 周期长度，用于下采样
+
+CUTS_PLUS:
+  N_NODES: _PLACEHOLDER_    # 自动根据 N_VAR 设置
+  N_GROUPS: _PLACEHOLDER_
+  INPUT_STEP: 9
+
+TRAIN:
+  BATCH_SIZE: 256
+  MAX_EPOCH: 30
+  BASE_LR: 0.0001
+  WEIGHT_DECAY: 0.0001
+  LR_POLICY: cosine
+  WARMUP_EPOCHS: 5
+  EVAL_PERIOD: 5
+  PRINT_FREQ: 100
+
+TEST:
+  THRESHOLD:
+    TYPE: best_f1           # 或 ratio
+
+SCORER:
+  TYPE: l2                  # 或 cos (对于 WADI, VAR 等数据集)
